@@ -118,4 +118,24 @@ class AspectOrderDto extends BaseAspectDto
             AspectOrderAttachDto::class
         );
     }
+
+    /**
+     * 获取场景值
+     *
+     * @param $scene
+     * @param $sceneId
+     * @return mixed
+     */
+    public function getAttachVal($scene, $sceneId)
+    {
+        $result = collect($this->getItem('attach', []))
+            ->where('scene', $scene)
+            ->where('scene_id', $sceneId);
+
+        if ($result->isEmpty()) {
+            return false;
+        }
+
+        return $result->first()['scene_val'];
+    }
 }
