@@ -1,0 +1,19 @@
+{
+    "name": "cblink-service/finch-aspect-tool",
+    "description": "Package description here.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nick",
+            "email": "me@xieying.vip"
+        }
+    ],
+    "require": {
+        "cblink/laravel-dto": "^2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cblink\\Service\\FinchAspect\\": "src"
+        }
+    }
+}
