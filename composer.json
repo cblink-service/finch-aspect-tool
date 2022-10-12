@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "cblink/laravel-dto": "^2.0.0"
+        "cblink/laravel-dto": "^2.0.0",
+        "hyperf/utils": "^2.0"
     },
     "autoload": {
         "psr-4": {
