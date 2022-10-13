@@ -42,6 +42,8 @@ class AspectOrderDto extends BaseAspectDto
         'discount',
         'products',
         'attach',
+
+        'address',
     ];
 
     #[ArrayShape([
@@ -106,6 +108,16 @@ class AspectOrderDto extends BaseAspectDto
             'discount',
             AspectDiscountDto::class
         );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddressData()
+    {
+        return $this->getFromCache('address', function () {
+            return new AspectOrderAddressDto($this->getItem('address'));
+        });
     }
 
     /**
