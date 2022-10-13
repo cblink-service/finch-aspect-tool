@@ -22,6 +22,7 @@ use JetBrains\PhpStorm\ArrayShape;
  * @property AspectOrderAttachDto[]|array $discount 订单折扣信息
  * @property AspectOrderProductDto[]|array $products 商品信息
  * @property AspectDiscountDto[]|array $attach 附加信息
+ * @property AspectOrderAddressDto $address 地址信息
  */
 class AspectOrderDto extends BaseAspectDto
 {
