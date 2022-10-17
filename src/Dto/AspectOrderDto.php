@@ -7,7 +7,7 @@ use JetBrains\PhpStorm\ArrayShape;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @property string $requestId
+ * @property string $request_id
  * @property string $scene 使用场景
  * @property int $sale_id 卖家ID
  * @property int $group_id 卖家分组ID
