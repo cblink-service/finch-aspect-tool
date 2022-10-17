@@ -28,7 +28,7 @@ use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
  * @property int $total_point 商品小计积分
  * @property int $total_fee 商品小计金额
  * @property int $discount_total_fee 商品合计优惠金额
- * @property string|null $cert_id 购物车ID
+ * @property string|null $cart_id 购物车ID
  * @property AspectOrderProductAdditionalDto[] $additional 附加品信息
  * @property AspectDiscountDto[] $discount 商品折扣信息（针对单行商品）
  */
@@ -60,7 +60,7 @@ class AspectOrderProductDto extends BaseAspectDto
         'discount_total_fee',
         'additional',
         'discount',
-        'cert_id',
+        'cart_id',
     ];
 
     public function getData()
