@@ -15,6 +15,7 @@ class AspectOrderConst
     // trade
     public const ATTACH_TRADE_PICK_TYPE = 'trade_pick_type';
     public const ATTACH_TRADE_CHANNEL = 'trade_channel';
+    public const ATTACH_TRADE_REMARK = 'trade_remark';
 
     // coupon
     public const ATTACH_COUPON_BUYER_COUPON_CODE = 'buyer_coupon_code';

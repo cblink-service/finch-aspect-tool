@@ -23,6 +23,7 @@ use JetBrains\PhpStorm\ArrayShape;
  * @property AspectOrderProductDto[]|array $products 商品信息
  * @property AspectDiscountDto[]|array $attach 附加信息
  * @property AspectOrderAddressDto $address 地址信息
+ * 2@property AspectOrderReserveDto $reserve 预定信息
  */
 class AspectOrderDto extends BaseAspectDto
 {
@@ -45,6 +46,7 @@ class AspectOrderDto extends BaseAspectDto
         'attach',
 
         'address',
+        'reserve',
     ];
 
     #[ArrayShape([
@@ -118,6 +120,16 @@ class AspectOrderDto extends BaseAspectDto
     {
         return $this->getFromCache('address', function () {
             return new AspectOrderAddressDto($this->getItem('address'));
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReserveData()
+    {
+        return $this->getFromCache('reserve', function () {
+            return new AspectOrderAddressDto($this->getItem('reserve'));
         });
     }
 
