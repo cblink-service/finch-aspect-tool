@@ -10,7 +10,8 @@
     ],
     "require": {
         "cblink/laravel-dto": "^2.0.0",
-        "hyperf/utils": "^2.0"
+        "hyperf/utils": "^2.0",
+        "ramsey/uuid": "^4.2"
     },
     "autoload": {
         "psr-4": {

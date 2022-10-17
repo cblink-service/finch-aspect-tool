@@ -4,8 +4,10 @@ namespace Cblink\Service\FinchAspect\Dto;
 
 use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
 use JetBrains\PhpStorm\ArrayShape;
+use Ramsey\Uuid\Uuid;
 
 /**
+ * @property string $requestId
  * @property string $scene 使用场景
  * @property int $sale_id 卖家ID
  * @property int $group_id 卖家分组ID
@@ -27,7 +29,21 @@ use JetBrains\PhpStorm\ArrayShape;
  */
 class AspectOrderDto extends BaseAspectDto
 {
+    /**
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
+        // set req id
+        if (!array_key_exists('request_id', $data)) {
+            $this->setAttribute('request_id', Uuid::uuid1()->toString());
+        }
+    }
+
     protected $fillable = [
+        'request_id',
         'scene',
         'sale_id',
         'group_id',
