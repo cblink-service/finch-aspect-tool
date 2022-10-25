@@ -17,11 +17,15 @@ class AspectOrderConst
     public const ATTACH_TRADE_CHANNEL = 'trade_channel';
     public const ATTACH_TRADE_REMARK = 'trade_remark';
 
+    // share
+    public const ATTACH_SHARE_OPENID = 'share_open_id';
+
     // coupon
     public const ATTACH_COUPON_BUYER_COUPON_CODE = 'buyer_coupon_code';
 
     // wechat
     public const ATTACH_WECHAT_MINI_APPID = 'mini_appid';
+
 
 
     // scene 场景
