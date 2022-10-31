@@ -61,6 +61,7 @@ class AspectOrderProductDto extends BaseAspectDto
         'additional',
         'discount',
         'cart_id',
+        'attach',
     ];
 
     public function getData()
@@ -116,4 +117,14 @@ class AspectOrderProductDto extends BaseAspectDto
         );
     }
 
+    /**
+     * @return AspectOrderProductDto[]
+     */
+    public function getAttachData()
+    {
+        return $this->getFromTranslateCache(
+            'attach',
+            AspectOrderAttachDto::class
+        );
+    }
 }
