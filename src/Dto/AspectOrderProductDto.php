@@ -127,4 +127,23 @@ class AspectOrderProductDto extends BaseAspectDto
             AspectOrderAttachDto::class
         );
     }
+
+    /**
+     * @param string $scene
+     * @param string $sceneId
+     * @param string|float|int|null $sceneVal
+     * @return $this|AspectOrderDto
+     */
+    public function appendAttach(string $scene, string $sceneId, string|float|int|null $sceneVal = null)
+    {
+        if ($sceneVal == "") {
+            return $this;
+        }
+
+        return $this->appendData('attach', [
+            'scene' => $scene,
+            'scene_id' => $sceneId,
+            'scene_val' => (string) $sceneVal,
+        ]);
+    }
 }
