@@ -1,6 +1,6 @@
 <?php
 
-namespace Cblink\Service\FinchAspect\Dto;
+namespace Cblink\Service\FinchAspect\Dto\Order;
 
 use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
 
@@ -15,7 +15,7 @@ use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
  * @property string $lng        经度
  * @property string $lat        纬度
  */
-class AspectOrderAddressDto extends BaseAspectDto
+class OrderAddressDto extends BaseAspectDto
 {
     protected $fillable = [
         'mobile',

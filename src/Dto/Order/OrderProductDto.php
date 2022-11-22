@@ -1,8 +1,9 @@
 <?php
 
-namespace Cblink\Service\FinchAspect\Dto;
+namespace Cblink\Service\FinchAspect\Dto\Order;
 
 use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
+
 
 /**
  * @property string $product_id 商品ID
@@ -17,51 +18,63 @@ use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
  * @property string $product_code 商品封面图片
  * @property string $sku_code sku编码
  * @property int $product_status 商品状态：1在售，2仓库中，3下架
+ * @property int $sku_status sku状态， 1正常
  * @property int $product_type 商品类型：1实物，3虚拟
  * @property int $group_id 商品分组ID
  * @property int $price 商品单价（包含附加品金额）
  * @property int $point 商品积分
  * @property int $stock 商品库存
  * @property int $num 需要购买的数量
- * @property int $additional_price 附加品金额
- * @property int $additional_total_fee 商品小计附加品金额
+ * @property numeric $weight 商品重量，单位千克
+ * @property int $calc_price 商品计费单价（包含附加品和商品金额）
+ * @property int $addons_price 附加品金额单价
+ * @property int $addons_total_fee 商品附加品小计金额
+ * @property int $product_total_fee 商品小计金额（不包含附加品）
  * @property int $total_point 商品小计积分
  * @property int $total_fee 商品小计金额
  * @property int $discount_total_fee 商品合计优惠金额
  * @property string|null $cart_id 购物车ID
- * @property AspectOrderProductAdditionalDto[] $additional 附加品信息
- * @property AspectDiscountDto[] $discount 商品折扣信息（针对单行商品）
+ * @property OrderProductAddonsDto[] $addons 附加品信息
+ * @property OrderDiscountDto[] $discount 商品折扣信息（针对单行商品）
+ * @property OrderAttachDto[] $attach 附加品信息
  */
-class AspectOrderProductDto extends BaseAspectDto
+class OrderProductDto extends BaseAspectDto
 {
     protected $fillable = [
-        'product_id',
-        'product_union_id',
+        // array
+        'addons',
+        'attach',
+        'discount',
+        // fillable
         'sku_id',
         'sku_union_id',
+        'product_id',
+        'product_union_id',
         'product_name',
         'product_desc',
         'sku_name',
-        'industry',
         'image',
+        'industry',
+        'product_type',
         'product_code',
         'sku_code',
         'product_status',
-        'product_type',
-        'group_id',
-        'price',
-        'point',
-        'stock',
+        'sku_status',
         'num',
-        'additional_price',
-        'additional_total_fee',
+        'stock',
+        'weight',
+        // price
+        'point',
         'total_point',
+        'price',
         'total_fee',
+        'addons_price',
+        'addons_total_fee',
+        'product_total_fee',
+        'calc_price',
         'discount_total_fee',
-        'additional',
-        'discount',
+        // ext id
         'cart_id',
-        'attach',
     ];
 
     public function getData()
@@ -79,52 +92,56 @@ class AspectOrderProductDto extends BaseAspectDto
             'product_code' => $this->getItem('product_code'),
             'sku_code' => $this->getItem('sku_code'),
             'product_status' => (int) $this->getItem('product_status'),
+            'sku_status' => (int) $this->getItem('sku_status'),
             'product_type' => (int) $this->getItem('product_type'),
             'group_id' => (int) $this->getItem('group_id', 0),
-            'price' => (int) $this->getItem('price', 0),
-            'point' => (int) $this->getItem('point', 0),
             'stock' => (int) $this->getItem('stock', 0),
             'num' => (int) $this->getItem('num', 0),
-            'additional_price' => (int) $this->getItem('additional_price', 0),
-            'additional_total_fee' => (int) $this->getItem('additional_total_fee', 0),
+            'point' => (int) $this->getItem('point', 0),
+            'price' => (int) $this->getItem('price', 0),
+            'addons_price' => (int) $this->getItem('addons_price', 0),
+            'calc_price' => (int) $this->getItem('calc_price', 0),
+            'addons_total_fee' => (int) $this->getItem('addons_total_fee', 0),
             'total_point' => (int) $this->getItem('total_point', 0),
+            'product_total_fee' => (int) $this->getItem('product_total_fee', 0),
             'total_fee' => (int) $this->getItem('total_fee', 0),
             'discount_total_fee' => (int) $this->getItem('discount_total_fee', 0),
-            'additional' => $this->getAdditionalData(),
+            'addons' => $this->getAddonsData(),
             'discount' => $this->getDiscountData(),
+            'attach' => $this->getAttachData(),
         ];
     }
 
     /**
-     * @return AspectOrderProductDto[]
+     * @return OrderProductDto[]
      */
-    public function getAdditionalData()
+    public function getAddonsData()
     {
         return $this->getFromTranslateCache(
-            'additional',
-            AspectOrderProductAdditionalDto::class
+            'addons',
+            OrderProductAddonsDto::class
         );
     }
 
     /**
-     * @return AspectOrderProductDto[]
+     * @return OrderProductDto[]
      */
     public function getDiscountData()
     {
         return $this->getFromTranslateCache(
             'discount',
-            AspectDiscountDto::class
+            OrderDiscountDto::class
         );
     }
 
     /**
-     * @return AspectOrderProductDto[]
+     * @return OrderProductDto[]
      */
     public function getAttachData()
     {
         return $this->getFromTranslateCache(
             'attach',
-            AspectOrderAttachDto::class
+            OrderAttachDto::class
         );
     }
 
@@ -132,7 +149,7 @@ class AspectOrderProductDto extends BaseAspectDto
      * @param string $scene
      * @param string $sceneId
      * @param string|float|int|null $sceneVal
-     * @return $this|AspectOrderDto
+     * @return $this|OrderDto
      */
     public function appendAttach(string $scene, string $sceneId, string|float|int|null $sceneVal = null)
     {

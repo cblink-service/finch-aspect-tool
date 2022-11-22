@@ -1,10 +1,8 @@
 <?php
 
-namespace Cblink\Service\FinchAspect\Dto;
+namespace Cblink\Service\FinchAspect\Dto\Order;
 
-use App\Common\Third\Consts\ProductConst;
 use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
-use Hyperf\Utils\Arr;
 
 /**
  * @property string $union_id
@@ -14,7 +12,7 @@ use Hyperf\Utils\Arr;
  * @property int $type
  * @property int $price_type
  */
-class AspectOrderProductAdditionalDto extends BaseAspectDto
+class OrderProductAddonsDto extends BaseAspectDto
 {
     protected $fillable = [
         'union_id',

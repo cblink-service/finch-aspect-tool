@@ -1,6 +1,6 @@
 <?php
 
-namespace Cblink\Service\FinchAspect\Dto;
+namespace Cblink\Service\FinchAspect\Dto\Order;
 
 use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
 
@@ -10,7 +10,7 @@ use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
  * @property string|null $table_no          桌号
  * @property int $reserve_at                取货时间
  */
-class AspectOrderReserveDto extends BaseAspectDto
+class OrderReserveDto extends BaseAspectDto
 {
     protected $fillable = [
         'pickup_name',

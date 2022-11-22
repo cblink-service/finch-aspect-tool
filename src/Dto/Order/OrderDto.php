@@ -1,6 +1,6 @@
 <?php
 
-namespace Cblink\Service\FinchAspect\Dto;
+namespace Cblink\Service\FinchAspect\Dto\Order;
 
 use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
 use JetBrains\PhpStorm\ArrayShape;
@@ -21,13 +21,13 @@ use Ramsey\Uuid\Uuid;
  * @property int $origin_fee 订单金额，单位分
  * @property int $point_fee 订单积分
  *
- * @property AspectOrderAttachDto[]|array $discount 订单折扣信息
- * @property AspectOrderProductDto[]|array $products 商品信息
- * @property AspectDiscountDto[]|array $attach 附加信息
- * @property AspectOrderAddressDto $address 地址信息
- * 2@property AspectOrderReserveDto $reserve 预定信息
+ * @property OrderAttachDto[]|array $discount 订单折扣信息
+ * @property OrderProductDto[]|array $products 商品信息
+ * @property OrderDiscountDto[]|array $attach 附加信息
+ * @property OrderAddressDto $address 地址信息
+ * 2@property OrderReserveDto $reserve 预定信息
  */
-class AspectOrderDto extends BaseAspectDto
+class OrderDto extends BaseAspectDto
 {
     /**
      * @param array $data
@@ -58,6 +58,7 @@ class AspectOrderDto extends BaseAspectDto
         'point_fee',
 
         'discount',
+        'additional',
         'products',
         'attach',
 
@@ -108,24 +109,35 @@ class AspectOrderDto extends BaseAspectDto
     }
 
     /**
-     * @return AspectOrderProductDto[]
+     * @return OrderProductDto[]
      */
     public function getProductsData()
     {
         return $this->getFromTranslateCache(
             'products',
-            AspectOrderProductDto::class
+            OrderProductDto::class
         );
     }
 
     /**
-     * @return AspectDiscountDto[]
+     * @return OrderDiscountDto[]
      */
     public function getDiscountData()
     {
         return $this->getFromTranslateCache(
             'discount',
-            AspectDiscountDto::class
+            OrderDiscountDto::class
+        );
+    }
+
+    /**
+     * @return OrderDiscountDto[]
+     */
+    public function getAdditionalData()
+    {
+        return $this->getFromTranslateCache(
+            'additional',
+            OrderAdditionalDto::class
         );
     }
 
@@ -135,7 +147,7 @@ class AspectOrderDto extends BaseAspectDto
     public function getAddressData()
     {
         return $this->getFromCache('address', function () {
-            return new AspectOrderAddressDto($this->getItem('address'));
+            return new OrderAddressDto($this->getItem('address'));
         });
     }
 
@@ -145,18 +157,18 @@ class AspectOrderDto extends BaseAspectDto
     public function getReserveData()
     {
         return $this->getFromCache('reserve', function () {
-            return new AspectOrderAddressDto($this->getItem('reserve'));
+            return new OrderAddressDto($this->getItem('reserve'));
         });
     }
 
     /**
-     * @return AspectOrderAttachDto[]
+     * @return OrderAttachDto[]
      */
     public function getAttachData()
     {
         return $this->getFromTranslateCache(
             'attach',
-            AspectOrderAttachDto::class
+            OrderAttachDto::class
         );
     }
 
@@ -174,7 +186,7 @@ class AspectOrderDto extends BaseAspectDto
             ->where('scene_id', $sceneId);
 
         if ($result->isEmpty()) {
-            return false;
+            return null;
         }
 
         return $result->first()['scene_val'];
@@ -184,7 +196,7 @@ class AspectOrderDto extends BaseAspectDto
      * @param string $scene
      * @param string $sceneId
      * @param string|float|int|null $sceneVal
-     * @return $this|AspectOrderDto
+     * @return $this|OrderDto
      */
     public function appendAttach(string $scene, string $sceneId, string|float|int|null $sceneVal = null)
     {
