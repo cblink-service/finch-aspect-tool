@@ -37,6 +37,7 @@ use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
  * @property OrderProductAddonsDto[] $addons 附加品信息
  * @property OrderDiscountDto[] $discount 商品折扣信息（针对单行商品）
  * @property OrderAttachDto[] $attach 附加品信息
+ * @property OrderProductFreightTemplateDto $freight_template 运费模版配置
  */
 class OrderProductDto extends BaseAspectDto
 {
@@ -45,6 +46,7 @@ class OrderProductDto extends BaseAspectDto
         'addons',
         'attach',
         'discount',
+        'freight_template',
         // fillable
         'sku_id',
         'sku_union_id',
@@ -73,8 +75,6 @@ class OrderProductDto extends BaseAspectDto
         'product_total_fee',
         'calc_price',
         'discount_total_fee',
-        // ext id
-        'cart_id',
     ];
 
     public function getData()
@@ -143,6 +143,16 @@ class OrderProductDto extends BaseAspectDto
             'attach',
             OrderAttachDto::class
         );
+    }
+
+    /**
+     * @return OrderProductFreightTemplateDto
+     */
+    public function getFreightTemplateData()
+    {
+        return $this->getFromCache('freight_template', function () {
+            return new OrderProductFreightTemplateDto($this->getItem('freight_template'));
+        });
     }
 
     /**
