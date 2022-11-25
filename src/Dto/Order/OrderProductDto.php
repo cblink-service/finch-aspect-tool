@@ -52,6 +52,7 @@ class OrderProductDto extends BaseAspectDto
         'sku_union_id',
         'product_id',
         'product_union_id',
+        'group_id',
         'product_name',
         'product_desc',
         'sku_name',
