@@ -18,7 +18,7 @@ use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
  * @property string $product_code 商品封面图片
  * @property string $sku_code sku编码
  * @property int $product_status 商品状态：1在售，2仓库中，3下架
- * @property int $sku_status sku状态， 1正常
+ * @property bool $delivery_status 配送状态， 1可配送，2不可配送
  * @property int $product_type 商品类型：1实物，3虚拟
  * @property int $group_id 商品分组ID
  * @property int $price 商品单价（包含附加品金额）
@@ -48,6 +48,7 @@ class OrderProductDto extends BaseAspectDto
         'discount',
         'freight_template',
         // fillable
+        'cart_id',
         'sku_id',
         'sku_union_id',
         'product_id',
@@ -62,7 +63,7 @@ class OrderProductDto extends BaseAspectDto
         'product_code',
         'sku_code',
         'product_status',
-        'sku_status',
+        'delivery_status',
         'num',
         'stock',
         'weight',
@@ -85,6 +86,7 @@ class OrderProductDto extends BaseAspectDto
             'product_union_id' => $this->getItem('product_union_id'),
             'sku_id' => $this->getItem('sku_id'),
             'sku_union_id' => $this->getItem('sku_union_id'),
+            'cart_id' => $this->getItem('cart_id'),
             'product_name' => $this->getItem('product_name'),
             'product_desc' => $this->getItem('product_desc'),
             'sku_name' => $this->getItem('sku_name'),
@@ -93,7 +95,7 @@ class OrderProductDto extends BaseAspectDto
             'product_code' => $this->getItem('product_code'),
             'sku_code' => $this->getItem('sku_code'),
             'product_status' => (int) $this->getItem('product_status'),
-            'sku_status' => (int) $this->getItem('sku_status'),
+            'delivery_status' => (int) $this->getItem('delivery_status', 1),
             'product_type' => (int) $this->getItem('product_type'),
             'group_id' => (int) $this->getItem('group_id', 0),
             'stock' => (int) $this->getItem('stock', 0),
