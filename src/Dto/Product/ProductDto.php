@@ -46,12 +46,33 @@ class ProductDto extends BaseAspectDto
     }
 
     /**
-     * @return OrderAddressDto
+     * @return ProductCategoryDto[]
+     */
+    public function getCategoryData()
+    {
+        return $this->getFromTranslateCache(
+            'category',
+            ProductCategoryDto::class
+        );
+    }
+
+    /**
+     * @return ProductBrandDto
+     */
+    public function getBrandData()
+    {
+        return $this->getFromCache('brand', function () {
+            return new ProductBrandDto($this->getItem('brand'));
+        });
+    }
+
+    /**
+     * @return ProductDiscountDto
      */
     public function getDiscountData()
     {
         return $this->getFromCache('discount', function () {
-            return new OrderAddressDto($this->getItem('discount'));
+            return new ProductDiscountDto($this->getItem('discount'));
         });
     }
 }
