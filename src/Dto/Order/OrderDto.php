@@ -22,6 +22,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property OrderAttachDto[]|array $discount 订单折扣信息
  * @property OrderProductDto[]|array $products 商品信息
+ * @property OrderProductDto[]|array $unable_products 无效的商品
  * @property OrderDiscountDto[]|array $attach 附加信息
  * @property OrderAddressDto $address 地址信息
  * 2@property OrderReserveDto $reserve 预定信息
@@ -42,11 +43,13 @@ class OrderDto extends BaseAspectDto
         'origin_fee',
         'point_fee',
 
+        'products',
+        'unable_products',
+
         'discount',
         'additional',
-        'products',
-        'attach',
 
+        'attach',
         'address',
         'reserve',
     ];
@@ -88,8 +91,12 @@ class OrderDto extends BaseAspectDto
         return $this->getBaseInfo() +
             [
                 'products' => $this->getProductsData(),
+                'unable_products' => $this->getUnableProductsData(),
                 'attach' => $this->getAttachData(),
+                'additional' => $this->getAdditionalData(),
+                'address' => $this->getAddressData(),
                 'discount' => $this->getDiscountData(),
+                'reserve' => $this->getReserveData(),
             ];
     }
 
@@ -100,6 +107,17 @@ class OrderDto extends BaseAspectDto
     {
         return $this->getFromTranslateCache(
             'products',
+            OrderProductDto::class
+        );
+    }
+
+    /**
+     * @return OrderProductDto[]
+     */
+    public function getUnableProductsData()
+    {
+        return $this->getFromTranslateCache(
+            'unable_products',
             OrderProductDto::class
         );
     }
