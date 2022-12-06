@@ -79,9 +79,7 @@ abstract class BaseAspectDto extends Dto
      */
     public function mapAttribute($key, Closure $closure)
     {
-        $this->payload[$key] = array_map(function ($item) use ($closure){
-            return $closure($item);
-        }, $this->getAttribute($key, []));
+        $this->payload[$key] = array_map($closure, $this->getAttribute($key, []), array_keys($this->getAttribute($key, [])));
 
         $this->unbindInstance($key);
     }
