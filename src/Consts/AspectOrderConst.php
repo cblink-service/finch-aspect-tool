@@ -16,6 +16,7 @@ class AspectOrderConst
     public const ATTACH_TRADE_PICK_TYPE = 'trade_pick_type';
     public const ATTACH_TRADE_CHANNEL = 'trade_channel';
     public const ATTACH_TRADE_REMARK = 'trade_remark';
+    public const ATTACH_TRADE_POINT = 'trade_point';
 
     // share
     public const ATTACH_SHARE_OPENID = 'share_open_id';
