@@ -145,12 +145,15 @@ abstract class BaseAspectDto extends Dto
     }
 
     /**
+     * 设置异常类
+     *
      * @param \Throwable $throwable
-     * @return void
+     * @return $this
      */
     public function setException(\Throwable $throwable)
     {
         $this->exception = $throwable;
+        return $this;
     }
 
     /**
