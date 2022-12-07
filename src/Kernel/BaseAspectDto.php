@@ -8,6 +8,11 @@ use Hyperf\Utils\Str;
 
 abstract class BaseAspectDto extends Dto
 {
+    /**
+     * @var \Exception|null
+     */
+    protected $exception;
+
     protected $instance = [];
 
     /**
@@ -137,6 +142,23 @@ abstract class BaseAspectDto extends Dto
     final protected function getMethod($name)
     {
         return sprintf('get%sData', ucfirst(Str::camel($name)));
+    }
+
+    /**
+     * @param \Throwable $throwable
+     * @return void
+     */
+    public function setException(\Throwable $throwable)
+    {
+        $this->exception = $throwable;
+    }
+
+    /**
+     * @return \Exception|null
+     */
+    public function getException()
+    {
+        return $this->exception;
     }
 
     /**
