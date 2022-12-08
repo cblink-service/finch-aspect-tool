@@ -126,10 +126,37 @@ abstract class BaseAspectDto extends Dto
             throw new \InvalidArgumentException(sprintf('%s type not array', $key));
         }
 
+        // 未初始化的情况
+        if (is_null($this->payload[$key])) {
+            $this->payload[$key] = [];
+        }
+
         $this->payload[$key][] = $data;
 
         if ($this->hasInstance($key)) {
             $this->unbindInstance($key);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $key
+     * @param $line
+     * @return $this
+     */
+    public function removedData($key, $line)
+    {
+        if (!is_array($this->getItem($key))) {
+            throw new \InvalidArgumentException(sprintf('%s type not array', $key));
+        }
+
+        if (is_array($this->payload[$key])) {
+            unset($this->payload[$key][$line]);
+
+            if ($this->hasInstance($key)) {
+                $this->unbindInstance($key);
+            }
         }
 
         return $this;
