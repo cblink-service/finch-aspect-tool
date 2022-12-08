@@ -122,12 +122,8 @@ abstract class BaseAspectDto extends Dto
      */
     public function appendData($key, array $data)
     {
-        if (!is_array($this->getItem($key))) {
-            throw new \InvalidArgumentException(sprintf('%s type not array', $key));
-        }
-
         // 未初始化的情况
-        if (is_null($this->payload[$key])) {
+        if (!is_array($this->getItem($key))) {
             $this->payload[$key] = [];
         }
 
@@ -145,13 +141,9 @@ abstract class BaseAspectDto extends Dto
      * @param $line
      * @return $this
      */
-    public function removedData($key, $line)
+    public function removeData($key, $line)
     {
-        if (!is_array($this->getItem($key))) {
-            throw new \InvalidArgumentException(sprintf('%s type not array', $key));
-        }
-
-        if (is_array($this->payload[$key])) {
+        if (is_array($this->getItem($key))) {
             unset($this->payload[$key][$line]);
 
             if ($this->hasInstance($key)) {
