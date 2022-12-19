@@ -19,7 +19,8 @@ class AspectOrderConst
     public const ATTACH_TRADE_POINT = 'trade_point';
 
     // share
-    public const ATTACH_SHARE_OPENID = 'share_open_id';
+    public const ATTACH_SHARE_OPENID = 'share_openid';
+    public const ATTACH_SHARE_SALESMAN_OPENID = 'share_salesman_openid';
 
     // coupon
     public const ATTACH_COUPON_BUYER_COUPON_CODE = 'buyer_coupon_code';

@@ -9,6 +9,7 @@ class AspectUserConst
 
     // attach_id 附加信息key名
     // share
-    public const ATTACH_SHARE_OPENID = 'share_open_id';
+    public const ATTACH_SHARE_OPENID = 'share_openid';
+    public const ATTACH_SHARE_SALESMAN_OPENID = 'share_salesman_openid';
 
 }
