@@ -7,6 +7,8 @@ use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
 
 /**
  * @property string $product_id 商品ID
+ * @property string $supplier_id 供应商ID
+ * @property int $channel 商品渠道/来源
  * @property string $product_union_id 商品 Union ID
  * @property string $sku_id 商品SKU ID
  * @property string $sku_union_id 商品SKU Union ID
@@ -49,6 +51,8 @@ class OrderProductDto extends BaseAspectDto
         'freight_template',
         // fillable
         'cart_id',
+        'supplier_id',
+        'channel',
         'sku_id',
         'sku_union_id',
         'product_id',
@@ -84,6 +88,7 @@ class OrderProductDto extends BaseAspectDto
         return [
             'product_id' => $this->getItem('product_id'),
             'product_union_id' => $this->getItem('product_union_id'),
+            'supplier_id' => $this->getItem('supplier_id'),
             'sku_id' => $this->getItem('sku_id'),
             'sku_union_id' => $this->getItem('sku_union_id'),
             'cart_id' => $this->getItem('cart_id'),
@@ -91,6 +96,7 @@ class OrderProductDto extends BaseAspectDto
             'product_desc' => $this->getItem('product_desc'),
             'sku_name' => $this->getItem('sku_name'),
             'industry' => $this->getItem('industry'),
+            'channel' => $this->getItem('channel'),
             'image' => $this->getItem('image'),
             'product_code' => $this->getItem('product_code'),
             'sku_code' => $this->getItem('sku_code'),

@@ -9,6 +9,8 @@ use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
 /**
  * @property string $id 商品ID
  * @property string $union_id 商品Union id
+ * @property string $supplier_id 供应商ID
+ * @property int $channel 商品渠道/来源
  * @property string $name 商品名称
  * @property string $image 商品封面图片
  * @property string $product_code 商品编码
@@ -30,7 +32,7 @@ use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
 class ProductDto extends BaseAspectDto
 {
     protected $fillable = [
-        "id", "union_id", "name", "image", "product_code", "industry", "product_type", "is_addons", "desc",
+        "id", "union_id", 'supplier_id', 'channel', "name", "image", "product_code", "industry", "product_type", "is_addons", "desc",
         "sku_type", "sort", "status", "price", "max_price", "origin", "brand", "category", 'sku', 'discount',
     ];
 
