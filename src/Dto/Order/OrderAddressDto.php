@@ -5,6 +5,7 @@ namespace Cblink\Service\FinchAspect\Dto\Order;
 use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
 
 /**
+ * @property string $type       提货类型
  * @property string $mobile     收货手机号
  * @property string $name       收货人信息
  * @property string $province   省份
@@ -18,6 +19,7 @@ use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
 class OrderAddressDto extends BaseAspectDto
 {
     protected $fillable = [
+        'type',
         'mobile',
         'name',
         'province',
