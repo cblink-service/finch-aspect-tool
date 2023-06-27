@@ -32,7 +32,7 @@ class OrderProductAddonsDto extends BaseAspectDto
 
         // 叠加加价
         if ($this->getItem('price_type') == 2) {
-            $price = bcmul($price, (string) $this->getItem('num', 0), 2);
+            $price = bcmul($price, (string) $this->getItem('num', 0));
         }
 
         return $price;
