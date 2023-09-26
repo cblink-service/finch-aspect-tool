@@ -150,7 +150,7 @@ class OrderDto extends BaseAspectDto
     public function getAddressData()
     {
         return $this->getFromCache('address', function () {
-            return new OrderAddressDto($this->getItem('address'));
+            return new OrderAddressDto($this->getItem('address', []));
         });
     }
 
@@ -160,7 +160,7 @@ class OrderDto extends BaseAspectDto
     public function getReserveData()
     {
         return $this->getFromCache('reserve', function () {
-            return new OrderReserveDto($this->getItem('reserve'));
+            return new OrderReserveDto($this->getItem('reserve', []));
         });
     }
 
