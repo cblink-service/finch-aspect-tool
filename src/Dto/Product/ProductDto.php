@@ -36,6 +36,7 @@ class ProductDto extends BaseAspectDto
     protected $fillable = [
         "id", "union_id", 'supplier_id', 'channel', "name", "image", "product_code", "industry", "product_type", "is_addons", "desc",
         "sku_type", "sort", "status", "price", "max_price", "origin", "brand", "category", 'sku', 'discount', 'salesman_price', 'point',
+        "stock"
     ];
 
     /**
