@@ -24,6 +24,7 @@ use Cblink\Service\FinchAspect\Kernel\BaseAspectDto;
  * @property numeric $price 最小价格，单位元
  * @property numeric $max_price 最大价格，单位元
  * @property string $origin 划线价（文本）
+ * @property int $point 积分
  * @property array|ProductBrandDto $brand 品牌信息
  * @property array $category 分类信息
  * @property ProductSkuDto[] $sku sku信息
@@ -34,7 +35,7 @@ class ProductDto extends BaseAspectDto
 {
     protected $fillable = [
         "id", "union_id", 'supplier_id', 'channel', "name", "image", "product_code", "industry", "product_type", "is_addons", "desc",
-        "sku_type", "sort", "status", "price", "max_price", "origin", "brand", "category", 'sku', 'discount', 'salesman_price',
+        "sku_type", "sort", "status", "price", "max_price", "origin", "brand", "category", 'sku', 'discount', 'salesman_price', 'point',
     ];
 
     /**
